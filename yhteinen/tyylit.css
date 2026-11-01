@@ -1,0 +1,110 @@
+/* Pikkuäpit: yhteiset tyylit.
+   Värit ovat muuttujina, jotta teeman vaihto (ruutu / paperi) onnistuu yhdestä paikasta.
+   Tämä on aloituspohja: kun laskurit siirretään tänne, yhdistetään niiden omat :root-määritykset tähän. */
+
+:root {
+  --tausta: #14181d;
+  --paneeli: #1c222a;
+  --reuna: #2c3540;
+  --teksti: #e6eaee;
+  --himmea: #8f9aa6;
+  --korostus: #4aa3ff;
+  --varoitus: #e5a93b;
+  --virhe: #e5604b;
+  --ok: #4cc38a;
+  --pyoristys: 8px;
+  --fontti: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Paperiteema tulostukseen ja valoisaan ympäristöön */
+:root[data-teema="paperi"] {
+  --tausta: #ffffff;
+  --paneeli: #f5f6f7;
+  --reuna: #cfd4d9;
+  --teksti: #111418;
+  --himmea: #5b6570;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--tausta);
+  color: var(--teksti);
+  font-family: var(--fontti);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.sivu { max-width: 960px; margin: 0 auto; padding: 16px; }
+
+h1 { font-size: 1.5rem; margin: 0 0 4px; }
+h2 { font-size: 1.15rem; margin: 24px 0 8px; }
+.himmea { color: var(--himmea); }
+
+a { color: var(--korostus); }
+
+/* Kortti (avattava) */
+.kortti {
+  background: var(--paneeli);
+  border: 1px solid var(--reuna);
+  border-radius: var(--pyoristys);
+  margin: 12px 0;
+}
+.kortti-otsikko {
+  padding: 12px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+.kortti-sisalto { padding: 0 14px 14px; }
+.kortti.kiinni .kortti-sisalto { display: none; }
+
+/* Lomake */
+label { display: block; font-size: .85rem; color: var(--himmea); margin: 8px 0 2px; }
+input, select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px; /* 16 px estää iPhonen automaattisen zoomauksen */
+  background: var(--tausta);
+  color: var(--teksti);
+  border: 1px solid var(--reuna);
+  border-radius: 6px;
+}
+input:focus, select:focus { outline: 2px solid var(--korostus); outline-offset: 0; }
+
+button, .nappi {
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--korostus);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+button.toissijainen { background: transparent; color: var(--teksti); border: 1px solid var(--reuna); }
+
+.varoitus { color: var(--varoitus); }
+.virhe { color: var(--virhe); }
+
+/* Työkalulista etusivulla */
+.tyokalut { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.tyokalu {
+  display: block;
+  padding: 14px;
+  background: var(--paneeli);
+  border: 1px solid var(--reuna);
+  border-radius: var(--pyoristys);
+  color: var(--teksti);
+  text-decoration: none;
+}
+.tyokalu:hover { border-color: var(--korostus); }
+.tyokalu b { display: block; margin-bottom: 4px; }
+
+@media print {
+  body { background: #fff; color: #000; }
+  .ei-tulosteessa { display: none !important; }
+}

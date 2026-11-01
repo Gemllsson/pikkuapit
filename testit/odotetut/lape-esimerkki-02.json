@@ -1,0 +1,7 @@
+{ "kappaleet": [
+    { "id": "lape1-taysi", "nimi": "Lape 1, täysi pelti", "kpl": 6,
+      "ulko": [[0,0],[1000,0],[1000,3000],[0,3000]], "meta": { "ryhma": "katto" } },
+    { "id": "lape1-jaannos", "nimi": "Lape 1, jäännöspelti", "kpl": 1,
+      "ulko": [[0,0],[500,0],[500,3000],[0,3000]], "meta": { "ryhma": "katto" } } ],
+  "varoitukset": [],
+  "yhteenveto": { "kpl": 7, "pellinMetrit": 21 } }

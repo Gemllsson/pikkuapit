@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pikkuäpit</title>
+<link rel="stylesheet" href="yhteinen/tyylit.css?v=1">
+</head>
+<body>
+<div class="sivu">
+  <h1>Pikkuäpit</h1>
+  <p class="himmea">Pieniä laskureita ammattilaisten arkeen. Testivaihe: kaikki ilmaista, palaute on tervetullutta.</p>
+
+  <h2>Työkalut</h2>
+  <div class="tyokalut" id="tyokalut">
+    <!-- Lisää tähän rivi aina kun uusi laskuri valmistuu -->
+    <p class="himmea" id="tyhja">Ensimmäiset laskurit tulossa: seinäpelti, kattopelti.</p>
+  </div>
+
+  <h2>Asetukset</h2>
+  <div class="kortti">
+    <div class="kortti-sisalto" style="padding-top:14px">
+      <label for="yritys">Yrityksen nimi tulosteisiin (jää tälle laitteelle)</label>
+      <input id="yritys" type="text" autocomplete="organization">
+    </div>
+  </div>
+</div>
+
+<script src="yhteinen/ui.js?v=1"></script>
+<script>
+  // Etusivun ainoa logiikka: yrityksen nimi muistiin.
+  (function () {
+    var kentta = document.getElementById('yritys');
+    kentta.value = PA.asetukset().yritys;
+    kentta.addEventListener('input', function () { PA.asetaAsetus('yritys', kentta.value); });
+  })();
+</script>
+</body>
+</html>

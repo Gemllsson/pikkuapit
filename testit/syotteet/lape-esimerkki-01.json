@@ -1,0 +1,2 @@
+{ "laskuri": "lapeEsimerkki",
+  "syote": { "paneelinLeveys": 1000, "lappeet": [ { "nimi": "Lape 1", "leveys": 6000, "korkeus": 4000 } ] } }
