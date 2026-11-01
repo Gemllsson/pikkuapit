@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seinäpellit | Pikkuäpit</title>
+<link rel="stylesheet" href="../yhteinen/tyylit.css?v=2">
+<style id="sivutyyli"></style>
+</head>
+<body>
+<header class="ylapalkki ei-tulosteessa">
+  <div class="ylapalkki-sisus">
+    <a class="takaisin" href="../index.html">← Pikkuäpit</a>
+    <h1>Seinäpellit</h1>
+  </div>
+</header>
+
+<main class="sivu ei-tulosteessa">
+  <div class="toolbar">
+    <button type="button" class="paa" data-act="uusi">+ Uusi seina</button>
+    <button type="button" data-act="tulosta-kaikki">🖨 Tulosta kaikki kuvat</button>
+    <button type="button" class="pieni" data-act="alkutila">Palauta alkutila</button>
+    <span class="tila">Syötteet tallentuvat tälle laitteelle</span>
+  </div>
+
+  <div id="seinat"></div>
+
+  <section class="kortti">
+    <div class="kortti-otsikko">Yhteenveto, kaikki seinät</div>
+    <div class="kortti-sisalto yhteenveto" id="yhteenveto"></div>
+  </section>
+</main>
+
+<div id="tuloste"></div>
+
+<script src="../yhteinen/ui.js?v=2"></script>
+<script src="seina.js?v=2"></script>
+<script src="seina-piirto.js?v=2"></script>
+<script src="seina-ui.js?v=2"></script>
+</body>
+</html>

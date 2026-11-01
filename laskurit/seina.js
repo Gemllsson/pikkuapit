@@ -183,6 +183,45 @@ function spRyhmittele(paneelit) {
         varoitukset: [],
         yhteenveto: { kpl: paneelit.length }
       };
+    },
+
+    /* ---- Alla olevat osat ovat uutta koodia (käyttöliittymän tilan käsittely), ei laskentaa ---- */
+
+    // Piirtokoodin tarvitsemat apufunktiot
+    _apu: { gridRajat: spGridRajat, korkeusKohdassa: spKorkeusKohdassa, harjaX: spHarjaX },
+
+    // Käyttöliittymän seinätila -> moottorin syöte (täydennettynä oletuksilla).
+    // Harjaseinällä oikea korkeus seuraa vasenta, kunnes käyttäjä muuttaa sitä (oikAuto).
+    syoteTilasta: function (w) {
+      return Object.assign({}, this.oletus, {
+        tyyppi: w.tyyppi, leveys: w.leveys, korkeus: w.korkeus,
+        korkeusVas: w.korkeusVas,
+        korkeusOik: (w.tyyppi === 'harja' && w.oikAuto) ? w.korkeusVas : w.korkeusOik,
+        harjaKorkeus: w.harjaKorkeus, harjaX: w.harjaX,
+        paneliLeveys: w.paneliLeveys, aloitus: w.aloitus, jaannos: w.jaannos,
+        aukot: w.aukot || []
+      });
+    },
+
+    uusiSeina: function (id, nimi, tyyppi, arvot) {
+      return Object.assign({
+        id: id, nimi: nimi, tyyppi: tyyppi,
+        leveys: null, korkeus: null, korkeusVas: null, korkeusOik: null, oikAuto: true,
+        harjaKorkeus: null, harjaX: null,          // harjaX null = keskellä (leveys / 2)
+        paneliLeveys: null,                         // tyhjä oletuksena
+        aloitus: 'vasen', jaannos: 'tayslevea', aukot: [], aukkoSeq: 1
+      }, arvot || {});
+    },
+
+    // Alkutila: kaksi seinää. Aukkoja ei ole valmiina.
+    oletusSeinat: function () {
+      return {
+        seq: 3,
+        seinat: [
+          this.uusiSeina(1, 'Päätyseinä', 'harja', { leveys: 8000, korkeusVas: 3500, harjaKorkeus: 5000 }),
+          this.uusiSeina(2, 'Etuseinä', 'suora', { leveys: 6000, korkeus: 3500 })
+        ]
+      };
     }
   };
 
