@@ -68,6 +68,14 @@ testi('etuseinä 1090 mm paneelilla: 5 täyttä + jäännös, kaikki 3500', () =
   assert.strictEqual(r.paneelit.length, 6);
   assert.deepStrictEqual(r.ryhmat.map(g => g.korkeus), [3500, 3500]);
 });
+testi('koonti: päätyseinän pellit yhteensä 8 kpl ja 34961 mm, etuseinä 6 kpl ja 21000 mm', () => {
+  const t = SM.oletusSeinat();
+  t.seinat.forEach(w => { w.paneliLeveys = 1090; });
+  const k0 = SM.koonti(SM.laske(SM.syoteTilasta(t.seinat[0])).ryhmat);
+  const k1 = SM.koonti(SM.laske(SM.syoteTilasta(t.seinat[1])).ryhmat);
+  assert.deepStrictEqual(k0, { kpl: 8, pituusMm: 34961 });
+  assert.deepStrictEqual(k1, { kpl: 6, pituusMm: 21000 });
+});
 testi('piirto tuottaa svg:n ja tyhjän ilman mittoja', () => {
   const w = SM.oletusSeinat().seinat[0]; w.paneliLeveys = 1090;
   const s = SM.syoteTilasta(w), r = SM.laske(s);

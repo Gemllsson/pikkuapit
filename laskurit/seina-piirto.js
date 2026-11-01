@@ -42,9 +42,29 @@
     return lx;
   }
 
-  function ruutu(s, paneelit) {
+  // W = kuvan leveys kuvapisteinä (UI antaa kontin todellisen leveyden, jolloin tekstit
+  // pysyvät puhelimellakin luettavan kokoisina: 1 yksikkö = 1 kuvapiste).
+  // Aukon nimi ja mitat aukon sisään; teksti pienenee tai lyhenee aukon koon mukaan
+  function aukonTeksti(a, ala, w, h, cx, cy, vari) {
+    var nimi = a.tyyppi === 'ovi' ? 'Ovi' : 'Ikkuna';
+    var rivit = [nimi, Math.round(a.leveys) + ' × ' + Math.round(a.korkeus)];
+    if (ala > 0) rivit.push('↑ ' + Math.round(ala));
+    var fs = 11;
+    function sopii(r, f) { return r.length * f * 1.25 <= h - 4 && Math.max.apply(null, r.map(function (x) { return x.length; })) * f * 0.6 <= w - 4; }
+    while (rivit.length > 1 && !sopii(rivit, fs)) {
+      if (fs > 9) fs -= 1; else rivit.pop();        // ensin pienennetään, sitten pudotetaan rivejä
+    }
+    if (!sopii(rivit, fs)) { fs = Math.floor((w - 4) / (rivit[0].length * 0.6)); if (fs < 7) return ''; fs = Math.min(fs, 11); }
+    var y0 = cy - (rivit.length - 1) * fs * 1.25 / 2 + fs * 0.35, out = '';
+    rivit.forEach(function (r, i) {
+      out += '<text x="' + cx + '" y="' + (y0 + i * fs * 1.25) + '" font-size="' + fs + '" font-weight="' + (i === 0 ? 700 : 500) + '" font-family="' + MONO + '" fill="' + vari + '" text-anchor="middle">' + r + '</text>';
+    });
+    return out;
+  }
+
+  function ruutu(s, paneelit, leveys) {
     if (!mitatOk(s)) return '';
-    var W = 640, H = 300, m = 24;
+    var W = Math.max(280, Math.round(leveys || 640)), H = Math.max(190, Math.round(W * 0.55)), m = 18;
     var scale = Math.min((W - 2 * m) / s.leveys, (H - 2 * m) / maxKorkeus(s));
     var originX = (W - s.leveys * scale) / 2, baseY = H - m;
     var px = function (x) { return originX + x * scale; };
@@ -67,6 +87,7 @@
       var col = a.tyyppi === 'ovi' ? '#2563eb' : '#16a34a';
       c += '<rect x="' + ax0 + '" y="' + ay0 + '" width="' + (ax1 - ax0) + '" height="' + (ay1 - ay0) + '" fill="#fff"/>';
       c += '<rect x="' + ax0 + '" y="' + ay0 + '" width="' + (ax1 - ax0) + '" height="' + (ay1 - ay0) + '" fill="' + col + '" fill-opacity="0.15" stroke="' + col + '" stroke-width="1.5"/>';
+      c += aukonTeksti(a, ala, ax1 - ax0, ay1 - ay0, (ax0 + ax1) / 2, (ay0 + ay1) / 2, a.tyyppi === 'ovi' ? '#1d4ed8' : '#15803d');
     });
 
     // Pituusmitta jokaiselle pellille; vierekkäisistä samanpituisista vain ensimmäiselle
@@ -117,7 +138,7 @@
         c += '<line x1="' + x0 + '" y1="' + y0 + '" x2="' + x1 + '" y2="' + y1 + '" stroke="#000" stroke-width="0.8"/><line x1="' + x0 + '" y1="' + y1 + '" x2="' + x1 + '" y2="' + y0 + '" stroke="#000" stroke-width="0.8"/>';
       }
       var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, fs = Math.max(9, Math.min(15, (x1 - x0) / 7));
-      var t = Math.round(a.leveys) + ' × ' + Math.round(a.korkeus);
+      var t = (a.tyyppi === 'ovi' ? 'Ovi ' : 'Ikkuna ') + Math.round(a.leveys) + ' × ' + Math.round(a.korkeus);
       c += '<rect x="' + (cx - t.length * fs * 0.32) + '" y="' + (cy - fs * 0.9) + '" width="' + (t.length * fs * 0.64) + '" height="' + (fs * (ala > 0 ? 2.5 : 1.4)) + '" fill="#fff"/>';
       c += '<text x="' + cx + '" y="' + cy + '" font-size="' + fs + '" font-weight="600" text-anchor="middle" ' + F + '>' + t + '</text>';
       if (ala > 0) c += '<text x="' + cx + '" y="' + (cy + fs * 1.2) + '" font-size="' + fs + '" text-anchor="middle" ' + F + '>↑ ' + Math.round(ala) + '</text>';

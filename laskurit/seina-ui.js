@@ -27,30 +27,37 @@
   }
 
   /* ---------- Tulokset ---------- */
+  function m(mm) { return (mm / 1000).toFixed(2).replace('.', ',') + ' m'; }
+
   function ryhmaRivit(ryhmat) {
     return ryhmat.map(function (g) {
-      var leik = g.tilausLeveys !== g.leveys ? ' <span class="leikkaus">(leikataan ' + PA.fmt(g.leveys, 0) + ' mm leveäksi)</span>' : '';
-      return '<div class="tulos-rivi"><span>' + PA.fmt(g.tilausLeveys, 0) + ' × ' + PA.fmt(g.korkeus, 0) + ' mm' + leik + '</span><span>' + g.kpl + ' kpl</span></div>';
+      var leik = g.tilausLeveys !== g.leveys ? '<span class="leikkaus">leikataan ' + PA.fmt(g.leveys, 0) + ' mm leveäksi</span>' : '';
+      return '<div class="tulos-rivi"><span class="mitta">' + PA.fmt(g.tilausLeveys, 0) + ' × ' + PA.fmt(g.korkeus, 0) + ' mm' + leik + '</span>' +
+        '<span class="kpl">' + g.kpl + ' kpl</span><span class="pit">' + m(g.kpl * g.korkeus) + '</span></div>';
     }).join('');
+  }
+
+  function yhtRivit(k) {
+    return '<div class="tulos-yht"><span>Peltejä yhteensä</span><span>' + k.kpl + ' kpl</span></div>' +
+      '<div class="tulos-yht pit-yht"><span>Pituus yhteensä</span><span>' + m(k.pituusMm) + '</span></div>';
   }
 
   function tulosHTML(w, r) {
     if (!w.paneliLeveys) return '<div class="tulos"><div class="tulos-otsikko">Pellintarve</div><div class="vihje">Syötä paneelin leveys, niin pellit lasketaan.</div></div>';
     if (!r.paneelit.length) return '<div class="tulos"><div class="tulos-otsikko">Pellintarve</div><div class="vihje">Syötä seinän mitat.</div></div>';
-    return '<div class="tulos"><div class="tulos-otsikko">Pellintarve</div>' + ryhmaRivit(r.ryhmat) +
-      '<div class="tulos-yht"><span>Peltejä yhteensä</span><span>' + r.paneelit.length + ' kpl</span></div></div>';
+    return '<div class="tulos"><div class="tulos-otsikko">Pellintarve <span class="sarakkeet">kpl · pituus</span></div>' + ryhmaRivit(r.ryhmat) + yhtRivit(M.koonti(r.ryhmat)) + '</div>';
   }
 
   function yhteenvetoHTML() {
-    var html = '', yht = 0;
+    var html = '', kpl = 0, pit = 0;
     tila.seinat.forEach(function (w) {
       var r = laske(w).r;
       if (!r.paneelit.length) return;
-      yht += r.paneelit.length;
+      var k = M.koonti(r.ryhmat); kpl += k.kpl; pit += k.pituusMm;
       html += '<h3>' + esc(w.nimi) + '</h3>' + ryhmaRivit(r.ryhmat);
     });
     if (!html) return '<div class="vihje">Yhteenveto näkyy, kun seinien mitat ja paneelin leveys on syötetty.</div>';
-    return html + '<div class="tulos-yht"><span>Peltejä yhteensä</span><span>' + yht + ' kpl</span></div>';
+    return html + yhtRivit({ kpl: kpl, pituusMm: pit });
   }
 
   /* ---------- Päivitys syötön jälkeen (ei piirrä korttia uudelleen) ---------- */
@@ -58,23 +65,21 @@
     var kortti = $('[data-wall="' + w.id + '"]');
     if (!kortti) return;
     var oik = $('[data-k="korkeusOik"]', kortti);
-    if (oik && document.activeElement !== oik) {
-      oik.value = w.oikAuto ? (w.korkeusVas == null ? '' : w.korkeusVas) : (w.korkeusOik == null ? '' : w.korkeusOik);
+    if (oik) {
+      if (document.activeElement !== oik) oik.value = w.oikAuto ? (w.korkeusVas == null ? '' : w.korkeusVas) : (w.korkeusOik == null ? '' : w.korkeusOik);
+      oik.classList.toggle('auto', !!w.oikAuto && w.tyyppi === 'harja');
     }
-    var tagOik = $('[data-tag="korkeusOik"]', kortti);
-    if (tagOik) tagOik.textContent = w.oikAuto ? '(sama kuin vasen)' : '';
     var hx = $('[data-k="harjaX"]', kortti);
-    if (hx && document.activeElement !== hx) {
-      hx.value = w.harjaX != null ? w.harjaX : (w.leveys > 0 ? Math.round(w.leveys / 2) : '');
+    if (hx) {
+      if (document.activeElement !== hx) hx.value = w.harjaX != null ? w.harjaX : (w.leveys > 0 ? Math.round(w.leveys / 2) : '');
+      hx.classList.toggle('auto', w.harjaX == null);
     }
-    var tagHx = $('[data-tag="harjaX"]', kortti);
-    if (tagHx) tagHx.textContent = w.harjaX == null ? '(keskellä)' : '';
   }
 
   function paivita(w) {
     var x = laske(w);
     var kuva = $('#kuva-' + w.id), tulos = $('#tulos-' + w.id);
-    if (kuva) kuva.innerHTML = P.mitatOk(x.s) ? P.ruutu(x.s, x.r.paneelit) : '<div class="tyhja">Syötä seinän mitat, niin kuva piirtyy tähän.</div>';
+    if (kuva) kuva.innerHTML = P.mitatOk(x.s) ? P.ruutu(x.s, x.r.paneelit, kuva.clientWidth) : '<div class="tyhja">Syötä seinän mitat, niin kuva piirtyy tähän.</div>';
     if (tulos) tulos.innerHTML = tulosHTML(w, x.r);
     $('#yhteenveto').innerHTML = yhteenvetoHTML();
     paivitaAuto(w);
@@ -82,10 +87,10 @@
   }
 
   /* ---------- Kortin HTML ---------- */
-  function kentta(w, k, otsikko, auto) {
+  function kentta(w, k, otsikko, titteli) {
     var v = w[k];
-    return '<div><label>' + otsikko + (auto ? ' <span class="auto-tag" data-tag="' + k + '"></span>' : '') + '</label>' +
-      '<input type="number" inputmode="numeric" data-id="' + w.id + '" data-k="' + k + '" value="' + (v == null ? '' : esc(v)) + '"></div>';
+    return '<div><label>' + otsikko + '</label>' +
+      '<input type="number" inputmode="numeric" data-id="' + w.id + '" data-k="' + k + '" value="' + (v == null ? '' : esc(v)) + '"' + (titteli ? ' title="' + titteli + '"' : '') + '></div>';
   }
   function seg(w, act, valinnat, nykyinen) {
     return '<div class="seg">' + valinnat.map(function (o) {
@@ -108,8 +113,8 @@
     var harja = w.tyyppi === 'harja', vino = w.tyyppi === 'vino';
     var mitat;
     if (harja) {
-      mitat = '<div class="rivi k3">' + kentta(w, 'leveys', 'Leveys mm') + kentta(w, 'korkeusVas', 'Korkeus vas. mm') + kentta(w, 'korkeusOik', 'Korkeus oik. mm', true) + '</div>' +
-        '<div class="rivi k2">' + kentta(w, 'harjaKorkeus', 'Harjan korkeus mm') + kentta(w, 'harjaX', 'Harjan sijainti vas. reunasta mm', true) + '</div>';
+      mitat = '<div class="rivi k3">' + kentta(w, 'leveys', 'Leveys mm') + kentta(w, 'korkeusVas', 'Korkeus vas. mm') + kentta(w, 'korkeusOik', 'Korkeus oik. mm', 'Sama kuin vasen, kunnes muutat') + '</div>' +
+        '<div class="rivi k2">' + kentta(w, 'harjaKorkeus', 'Harjan korkeus mm') + kentta(w, 'harjaX', 'Harjan sijainti mm', 'Etäisyys vasemmasta reunasta. Oletus: keskellä') + '</div>';
     } else if (vino) {
       mitat = '<div class="rivi k3">' + kentta(w, 'leveys', 'Leveys mm') + kentta(w, 'korkeusVas', 'Korkeus vas. mm') + kentta(w, 'korkeusOik', 'Korkeus oik. mm') + '</div>';
     } else {
@@ -174,13 +179,34 @@
     w.tyyppi = uusi;
   }
 
-  function tulosta(lista) {
+  function tulosteYhteenveto() {
+    var kpl = 0, pit = 0, osat = '';
+    tila.seinat.forEach(function (w) {
+      var r = laske(w).r;
+      if (!r.paneelit.length) return;
+      var k = M.koonti(r.ryhmat); kpl += k.kpl; pit += k.pituusMm;
+      osat += '<div class="ty-seina"><h3>' + esc(w.nimi) + '</h3><table>' + r.ryhmat.map(function (g) {
+        return '<tr><td>' + PA.fmt(g.tilausLeveys, 0) + ' × ' + PA.fmt(g.korkeus, 0) + ' mm' +
+          (g.tilausLeveys !== g.leveys ? ' <small>(leikataan ' + PA.fmt(g.leveys, 0) + ')</small>' : '') + '</td><td>' + g.kpl + ' kpl</td><td>' + m(g.kpl * g.korkeus) + '</td></tr>';
+      }).join('') + '<tr class="yht"><td>Yhteensä</td><td>' + k.kpl + ' kpl</td><td>' + m(k.pituusMm) + '</td></tr></table></div>';
+    });
+    if (!osat) return '';
+    return '<div class="ty-kaikki"><b>Kaikki seinät yhteensä</b><span>' + kpl + ' kpl · ' + m(pit) + '</span></div><div class="ty-seinat">' + osat + '</div>';
+  }
+
+  // lista: tulostettavat seinät; yhteenveto: true = lisätään yhteenvetosivu (tai pelkkä yhteenveto, jos lista on tyhjä)
+  function tulosta(lista, yhteenveto) {
     var sivut = '', yritys = PA.asetukset().yritys, pvm = new Date().toLocaleDateString('fi-FI');
+    var otsikko = function (nimi) { return '<div class="tulosteotsikko"><b>' + esc(nimi) + '</b><span>' + esc(yritys) + (yritys ? ' · ' : '') + pvm + '</span></div>'; };
     lista.forEach(function (w) {
       var x = laske(w);
       if (!x.r.paneelit.length) return;
-      sivut += '<div class="tulostesivu"><div class="tulosteotsikko"><b>' + esc(w.nimi) + '</b><span>' + esc(yritys) + (yritys ? ' · ' : '') + pvm + '</span></div>' + P.tuloste(x.s, x.r.paneelit) + '</div>';
+      sivut += '<div class="tulostesivu">' + otsikko(w.nimi) + P.tuloste(x.s, x.r.paneelit) + '</div>';
     });
+    if (yhteenveto) {
+      var y = tulosteYhteenveto();
+      if (y) sivut += '<div class="tulostesivu">' + otsikko('Yhteenveto') + y + '</div>';
+    }
     if (!sivut) { alert('Syötä seinän mitat ja paneelin leveys ensin.'); return; }
     $('#tuloste').innerHTML = sivut;
     var tyyli = $('#sivutyyli');
@@ -230,7 +256,8 @@
     if (!b) return;
     var act = b.getAttribute('data-act'), v = b.getAttribute('data-v'), id = +b.getAttribute('data-id'), w = id ? etsi(id) : null;
     if (act === 'uusi') return lisaaSeina();
-    if (act === 'tulosta-kaikki') return tulosta(tila.seinat);
+    if (act === 'tulosta-kaikki') return tulosta(tila.seinat, true);
+    if (act === 'tulosta-yhteenveto') return tulosta([], true);
     if (act === 'alkutila') {
       if (confirm('Palautetaanko alkutila? Kaikki nykyiset seinät ja syötteet poistetaan.')) { tila = M.oletusSeinat(); piirraKaikki(); }
       return;
@@ -250,6 +277,14 @@
       return;
     }
     piirraKaikki();
+  });
+
+  var viimeLeveys = window.innerWidth, ajastin;
+  window.addEventListener('resize', function () {
+    if (window.innerWidth === viimeLeveys) return;      // pelkkä korkeuden muutos (osoitepalkki) ei piirrä uudelleen
+    viimeLeveys = window.innerWidth;
+    clearTimeout(ajastin);
+    ajastin = setTimeout(function () { tila.seinat.forEach(function (w) { var x = laske(w), k = $('#kuva-' + w.id); if (k && P.mitatOk(x.s)) k.innerHTML = P.ruutu(x.s, x.r.paneelit, k.clientWidth); }); }, 150);
   });
 
   lataa();

@@ -190,6 +190,13 @@ function spRyhmittele(paneelit) {
     // Piirtokoodin tarvitsemat apufunktiot
     _apu: { gridRajat: spGridRajat, korkeusKohdassa: spKorkeusKohdassa, harjaX: spHarjaX },
 
+    // Ryhmälistan koonti: peltien määrä ja pituus yhteensä (mm). Pellin pituus = ryhmän "korkeus".
+    koonti: function (ryhmat) {
+      var kpl = 0, pituusMm = 0;
+      (ryhmat || []).forEach(function (g) { kpl += g.kpl; pituusMm += g.kpl * g.korkeus; });
+      return { kpl: kpl, pituusMm: pituusMm };
+    },
+
     // Käyttöliittymän seinätila -> moottorin syöte (täydennettynä oletuksilla).
     // Harjaseinällä oikea korkeus seuraa vasenta, kunnes käyttäjä muuttaa sitä (oikAuto).
     syoteTilasta: function (w) {
