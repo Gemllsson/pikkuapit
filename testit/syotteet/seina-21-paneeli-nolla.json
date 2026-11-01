@@ -1,0 +1,11 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Virhe: paneelin leveys 0 -> ei tulosta",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 5000,
+  "korkeus": 3000,
+  "paneliLeveys": 0,
+  "aloitus": "vasen"
+ }
+}

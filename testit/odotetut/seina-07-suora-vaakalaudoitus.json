@@ -1,0 +1,184 @@
+{
+ "paneelit": [
+  {
+   "x": 0,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 125,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 250,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 375,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 500,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 625,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 750,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 875,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 1000,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 1125,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 1250,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 1375,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 1500,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 1625,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 1750,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 1875,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 2000,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 2125,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 2250,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 2375,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 2500,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 2625,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 2750,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  },
+  {
+   "x": 2875,
+   "leveys": 125,
+   "korkeus": 4000,
+   "yPohja": 0,
+   "tilausLeveys": 125
+  }
+ ],
+ "ryhmat": [
+  {
+   "tilausLeveys": 125,
+   "leveys": 125,
+   "korkeus": 4000,
+   "kpl": 24
+  }
+ ],
+ "varoitukset": [],
+ "yhteenveto": {
+  "kpl": 24
+ }
+}

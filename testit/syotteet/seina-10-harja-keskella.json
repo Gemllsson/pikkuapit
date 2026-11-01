@@ -1,0 +1,13 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Harja 6000, reunat 2400, huippu 3400 keskellä (harjaX puuttuu -> keskelle)",
+ "syote": {
+  "tyyppi": "harja",
+  "leveys": 6000,
+  "korkeusVas": 2400,
+  "korkeusOik": 2400,
+  "harjaKorkeus": 3400,
+  "paneliLeveys": 1000,
+  "aloitus": "vasen"
+ }
+}

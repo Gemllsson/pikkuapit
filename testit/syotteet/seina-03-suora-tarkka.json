@@ -1,0 +1,12 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Jäännös tarkkana: tilausleveys 640",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 5000,
+  "korkeus": 3000,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen",
+  "jaannos": "tarkka"
+ }
+}

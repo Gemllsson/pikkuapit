@@ -1,0 +1,19 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Ovi peittää täsmälleen sarakkeen 2 (x 1090, lev 1090, kork 2100): header 900",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 5000,
+  "korkeus": 3000,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen",
+  "aukot": [
+   {
+    "tyyppi": "ovi",
+    "x": 1090,
+    "leveys": 1090,
+    "korkeus": 2100
+   }
+  ]
+ }
+}

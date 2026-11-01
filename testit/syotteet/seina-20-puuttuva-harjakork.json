@@ -1,0 +1,11 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Virhe: harjan korkeus puuttuu -> ei tulosta",
+ "syote": {
+  "tyyppi": "harja",
+  "leveys": 6000,
+  "korkeusVas": 2400,
+  "korkeusOik": 2400,
+  "paneliLeveys": 1000
+ }
+}

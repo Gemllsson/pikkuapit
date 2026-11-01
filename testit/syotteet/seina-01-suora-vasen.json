@@ -1,0 +1,11 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Suora 5000x3000, 1090 mm paneeli, aloitus vasemmalta: 4 täyttä + 640 jäännös (tilausleveys 1090)",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 5000,
+  "korkeus": 3000,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen"
+ }
+}

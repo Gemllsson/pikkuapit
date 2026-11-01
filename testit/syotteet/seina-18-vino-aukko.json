@@ -1,0 +1,20 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Vino seinä, ovi matalamman pään lähellä",
+ "syote": {
+  "tyyppi": "vino",
+  "leveys": 6540,
+  "korkeusVas": 2600,
+  "korkeusOik": 4200,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen",
+  "aukot": [
+   {
+    "tyyppi": "ovi",
+    "x": 1090,
+    "leveys": 1090,
+    "korkeus": 2100
+   }
+  ]
+ }
+}

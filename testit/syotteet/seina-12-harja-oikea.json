@@ -1,0 +1,14 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Harja, aloitus oikealta, 1090 paneeli",
+ "syote": {
+  "tyyppi": "harja",
+  "leveys": 7500,
+  "korkeusVas": 2400,
+  "korkeusOik": 2400,
+  "harjaKorkeus": 3600,
+  "harjaX": 3750,
+  "paneliLeveys": 1090,
+  "aloitus": "oikea"
+ }
+}

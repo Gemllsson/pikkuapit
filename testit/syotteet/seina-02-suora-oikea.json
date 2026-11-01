@@ -1,0 +1,11 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Sama, aloitus oikealta: jäännös tulee vasempaan reunaan",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 5000,
+  "korkeus": 3000,
+  "paneliLeveys": 1090,
+  "aloitus": "oikea"
+ }
+}

@@ -1,0 +1,62 @@
+{
+ "paneelit": [
+  {
+   "x": 0,
+   "leveys": 1000,
+   "korkeus": 2750,
+   "yPohja": 0,
+   "tilausLeveys": 1000
+  },
+  {
+   "x": 1000,
+   "leveys": 1000,
+   "korkeus": 3000,
+   "yPohja": 0,
+   "tilausLeveys": 1000
+  },
+  {
+   "x": 2000,
+   "leveys": 1000,
+   "korkeus": 3250,
+   "yPohja": 0,
+   "tilausLeveys": 1000
+  },
+  {
+   "x": 3000,
+   "leveys": 1000,
+   "korkeus": 3500,
+   "yPohja": 0,
+   "tilausLeveys": 1000
+  }
+ ],
+ "ryhmat": [
+  {
+   "tilausLeveys": 1000,
+   "leveys": 1000,
+   "korkeus": 3500,
+   "kpl": 1
+  },
+  {
+   "tilausLeveys": 1000,
+   "leveys": 1000,
+   "korkeus": 3250,
+   "kpl": 1
+  },
+  {
+   "tilausLeveys": 1000,
+   "leveys": 1000,
+   "korkeus": 3000,
+   "kpl": 1
+  },
+  {
+   "tilausLeveys": 1000,
+   "leveys": 1000,
+   "korkeus": 2750,
+   "kpl": 1
+  }
+ ],
+ "varoitukset": [],
+ "yhteenveto": {
+  "kpl": 4
+ }
+}

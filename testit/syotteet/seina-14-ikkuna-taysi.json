@@ -1,0 +1,20 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Ikkuna peittää sarakkeen 3 (alakork 900, kork 1200): yläpelti 900 + alapelti 900",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 5000,
+  "korkeus": 3000,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen",
+  "aukot": [
+   {
+    "tyyppi": "ikkuna",
+    "x": 2180,
+    "leveys": 1090,
+    "korkeus": 1200,
+    "alaKorkeus": 900
+   }
+  ]
+ }
+}

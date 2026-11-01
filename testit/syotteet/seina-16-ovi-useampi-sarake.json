@@ -1,0 +1,19 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Leveä ovi peittää kaksi saraketta (x 1090, lev 2180)",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 5000,
+  "korkeus": 3000,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen",
+  "aukot": [
+   {
+    "tyyppi": "ovi",
+    "x": 1090,
+    "leveys": 2180,
+    "korkeus": 2100
+   }
+  ]
+ }
+}

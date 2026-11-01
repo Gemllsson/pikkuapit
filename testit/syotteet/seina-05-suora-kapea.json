@@ -1,0 +1,11 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Seinä kapeampi kuin yksi paneeli (800 mm)",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 800,
+  "korkeus": 3000,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen"
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Harja siirretty: harjaX 2200, huippu osuu pellin sisään",
+ "syote": {
+  "tyyppi": "harja",
+  "leveys": 6000,
+  "korkeusVas": 2400,
+  "korkeusOik": 2600,
+  "harjaKorkeus": 3400,
+  "harjaX": 2200,
+  "paneliLeveys": 1000,
+  "aloitus": "vasen"
+ }
+}

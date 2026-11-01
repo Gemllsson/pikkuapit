@@ -1,0 +1,11 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Paneelin leveys 1180, seinä 7000",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 7000,
+  "korkeus": 3000,
+  "paneliLeveys": 1180,
+  "aloitus": "vasen"
+ }
+}

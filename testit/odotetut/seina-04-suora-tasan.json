@@ -1,0 +1,44 @@
+{
+ "paneelit": [
+  {
+   "x": 0,
+   "leveys": 1090,
+   "korkeus": 3000,
+   "yPohja": 0,
+   "tilausLeveys": 1090
+  },
+  {
+   "x": 1090,
+   "leveys": 1090,
+   "korkeus": 3000,
+   "yPohja": 0,
+   "tilausLeveys": 1090
+  },
+  {
+   "x": 2180,
+   "leveys": 1090,
+   "korkeus": 3000,
+   "yPohja": 0,
+   "tilausLeveys": 1090
+  },
+  {
+   "x": 3270,
+   "leveys": 1090,
+   "korkeus": 3000,
+   "yPohja": 0,
+   "tilausLeveys": 1090
+  }
+ ],
+ "ryhmat": [
+  {
+   "tilausLeveys": 1090,
+   "leveys": 1090,
+   "korkeus": 3000,
+   "kpl": 4
+  }
+ ],
+ "varoitukset": [],
+ "yhteenveto": {
+  "kpl": 4
+ }
+}

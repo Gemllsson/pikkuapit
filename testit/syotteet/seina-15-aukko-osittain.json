@@ -1,0 +1,19 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Ovi ei peitä yhtään saraketta kokonaan: ei vaikutusta peltilistaan",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 5000,
+  "korkeus": 3000,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen",
+  "aukot": [
+   {
+    "tyyppi": "ovi",
+    "x": 1000,
+    "leveys": 1000,
+    "korkeus": 2100
+   }
+  ]
+ }
+}

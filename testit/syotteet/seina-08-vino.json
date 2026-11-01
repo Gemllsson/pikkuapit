@@ -1,0 +1,12 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Vino 4000, vasen 2500, oikea 3500, paneeli 1000: pituudet 2750, 3000, 3250, 3500",
+ "syote": {
+  "tyyppi": "vino",
+  "leveys": 4000,
+  "korkeusVas": 2500,
+  "korkeusOik": 3500,
+  "paneliLeveys": 1000,
+  "aloitus": "vasen"
+ }
+}

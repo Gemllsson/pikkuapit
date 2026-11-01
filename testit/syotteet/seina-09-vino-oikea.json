@@ -1,0 +1,12 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Sama vino, aloitus oikealta",
+ "syote": {
+  "tyyppi": "vino",
+  "leveys": 4300,
+  "korkeusVas": 2500,
+  "korkeusOik": 3500,
+  "paneliLeveys": 1000,
+  "aloitus": "oikea"
+ }
+}

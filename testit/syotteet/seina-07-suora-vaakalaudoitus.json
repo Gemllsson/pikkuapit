@@ -1,0 +1,11 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Paneelin leveys 125 (vaakalaudoituksen idea): seinä 3000, korkeus 4000",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 3000,
+  "korkeus": 4000,
+  "paneliLeveys": 125,
+  "aloitus": "vasen"
+ }
+}

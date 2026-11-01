@@ -1,0 +1,26 @@
+{
+ "laskuri": "seina",
+ "kuvaus": "Pitkä seinä 12000x6000, ovi 1000-3000, ikkuna 4000-6000 (korkeus 1500, alakork 1000)",
+ "syote": {
+  "tyyppi": "suora",
+  "leveys": 12000,
+  "korkeus": 6000,
+  "paneliLeveys": 1090,
+  "aloitus": "vasen",
+  "aukot": [
+   {
+    "tyyppi": "ovi",
+    "x": 1000,
+    "leveys": 2000,
+    "korkeus": 2400
+   },
+   {
+    "tyyppi": "ikkuna",
+    "x": 4000,
+    "leveys": 2000,
+    "korkeus": 1500,
+    "alaKorkeus": 1000
+   }
+  ]
+ }
+}
